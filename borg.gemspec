@@ -10,13 +10,11 @@ Gem::Specification.new do |s|
   s.summary     = "Add this later."
   s.description = "Add this later."
 
-  s.files = Dir["{capistrano,service}/**/*"] + ["Capfile", "README.md"]
+  s.files = Dir["{capistrano,service,lib}/**/*"] + ["Capfile", "README.md"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "capistrano"
   s.add_dependency "capistrano_colors"
   s.add_dependency "colored"
-  s.add_dependency 'net-ping'
-  s.add_dependency "pry"
   s.add_dependency 'term-ansicolor'
 end
