@@ -9,13 +9,16 @@ deployment.
 
 ```
 my-deployer-package
-├── collective
+├── cap
+|   ├── applications
+|   |   ├── application1.rb
+│   |   └── application2.rb
 |   ├── initilizers
 |   |   ├── initilizer1.rb
 │   |   └── initilizer2.rb
-|   └── services
-|       ├── service1.rb
-│       └── service2.rb
+|   └── recipies
+|       ├── recipie1.rb
+│       └── recipie2.rb
 ├── Capfile
 ├── Gemfile
 └── Gemfile.lock
@@ -37,13 +40,13 @@ require 'borg'
 
 ```
 my-service-package
-├── collective
+├── cap
 |   ├── initilizers
 |   |   ├── initilizer1.rb
 │   |   └── initilizer2.rb
-|   └── services
-|       ├── service1.rb
-│       └── service2.rb
+|   └── recipies
+|       ├── recipie1.rb
+│       └── recipie2.rb
 ├── my-service-package.gemspec
 ├── Gemfile
 └── Gemfile.lock
