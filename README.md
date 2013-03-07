@@ -4,6 +4,9 @@ deployment.
 
 # Setup
 ## Deployer Package
+
+`borgify` Sets up the following structure
+
 ```
 my-deployer-package
 ├── collective
@@ -30,6 +33,8 @@ require 'borg'
 ```
 
 ## Services Package
+`borgify plugin` Sets up the following structure
+
 ```
 my-service-package
 ├── collective

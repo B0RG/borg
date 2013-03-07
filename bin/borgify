@@ -1,0 +1,65 @@
+#!/usr/bin/env ruby
+plugin = (ARGV.count == 1 and ARGV[0] == "plugin")
+
+if ARGV.empty? or plugin
+
+  puts "Creating directory structure"
+  folders = %w{collective/initializers collective/services lib}
+  folders << "collective/applications" unless plugin
+  folders.each { |folder| system("mkdir -p #{folder}") }
+
+  gem_name = File.basename(Dir.pwd)
+  puts "Creating required files"
+  files = {}
+
+  files["lib/#{gem_name}.rb"] = <<-GemRequireFile
+require 'borg.rb'
+Capistrano::Configuration.instance.load do
+  assimilate "#{gem_name}"
+end
+  GemRequireFile
+  if plugin
+    files["#{gem_name}.gemspec"] = <<-gemspec
+$LOAD_PATH.unshift 'lib'
+require "#{gem_name}/version"
+
+Gem::Specification.new do |s|
+  s.name              = "#{gem_name}"
+  s.version           = #{gem_name.capitalize}::VERSION
+  s.date              = Time.now.strftime('%Y-%m-%d')
+  s.summary           = "Feed me."
+  s.homepage          = "#{gem_name} homepage"
+  s.email             = email"
+  s.authors           = [ "Authors" ]
+  s.has_rdoc          = false
+
+  s.files             = %w( README.md Rakefile LICENSE )
+  s.files            += Dir.glob("lib/**/*")
+  s.files            += Dir.glob("collective/**/*")
+
+  s.description       = <<desc
+  Feed me.
+desc
+  s.add_dependency "borg"
+end
+    gemspec
+  else
+    files["Capfile"] = <<-Capfile
+require 'borg.rb'
+    Capfile
+
+    files["Gemfile"] = <<-Gemfile
+gem 'borg.rb'
+    Gemfile
+  end
+
+  files.each{ |file_name, content| File.open(file_name, 'w') { |file| file.write(content) } }
+
+else
+  # display help if parameters input
+  puts <<-HELP
+borgify only supports to ways of calling it.
+borgify         # to setup deployment project
+borgify plugin  # to setup a pluging for borg
+  HELP
+end

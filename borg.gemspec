@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{capistrano,service,lib}/**/*"] + ["Capfile", "README.md"]
   s.test_files = Dir["test/**/*"]
+  s.executables = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
 
   s.add_dependency "capistrano"
   s.add_dependency "capistrano_colors"
