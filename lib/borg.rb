@@ -1,5 +1,10 @@
+require 'capistrano'
 require 'erb'
+
 require 'borg/assimilator'
+require 'borg/errors'
+require 'borg/server/base'
+
 # Ensure ruby 1.9.X
 raise "Ruby 1.9.X required" unless RUBY_VERSION =~ /^1\.9\.\d$/
 
@@ -14,4 +19,4 @@ Capistrano::Configuration.send :include, Borg::Assimilator
 Capistrano::Configuration.instance.load do
   assimilate "borg"
   load "services/dumb"
-end
+end unless Capistrano::Configuration.instance.nil?
