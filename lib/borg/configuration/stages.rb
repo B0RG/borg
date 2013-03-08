@@ -25,7 +25,7 @@ module Borg
           end
         end
         @applications[app].stages[name] ||= Stage.new(name, @applications[app])
-        @applications[app].stages[name] << block
+        @applications[app].stages[name].execution_blocks << block
       end
 
       class Stage
