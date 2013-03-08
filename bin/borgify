@@ -4,8 +4,8 @@ plugin = (ARGV.count == 1 and ARGV[0] == "plugin")
 if ARGV.empty? or plugin
 
   puts "Creating directory structure"
-  folders = %w{collective/initializers collective/services lib}
-  folders << "collective/applications" unless plugin
+  folders = %w{cap/initializers cap/recipes lib}
+  folders << "cap/applications" unless plugin
   folders.each { |folder| system("mkdir -p #{folder}") }
 
   gem_name = File.basename(Dir.pwd)
@@ -35,7 +35,7 @@ Gem::Specification.new do |s|
 
   s.files             = %w( README.md Rakefile LICENSE )
   s.files            += Dir.glob("lib/**/*")
-  s.files            += Dir.glob("collective/**/*")
+  s.files            += Dir.glob("cap/**/*")
 
   s.description       = <<desc
   Feed me.
