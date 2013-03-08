@@ -14,27 +14,27 @@ module Borg
       end
       private :initialize_with_stages
 
-      def stages (application, name, &block)
-        application = application.to_sym
+      def stages (app, name, &block)
+        app = app.to_sym
         name = name.to_sym
-        raise ArgumentError, "application does not exist" unless @applications[application]
+        application app unless @applications[app]
 
-        namespace application do
+        namespace app do
           task name do
-            @applications[name].stages[name].execute
+            @applications[app].stages[name].execute
           end
         end
-        @applications[application].stages[name] = Stage.new(name, @applications[application], &block)
+        @applications[app].stages[name] ||= Stage.new(name, @applications[app])
+        @applications[app].stages[name] << block
       end
 
       class Stage
-        attr_accessor :execution_block
+        attr_accessor :execution_blocks
         attr_accessor :parent
 
         def initialize name, parent, &block
           @name = name
           @parent = parent
-          @execution_block = block
         end
 
         def execute

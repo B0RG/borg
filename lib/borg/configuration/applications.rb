@@ -21,17 +21,17 @@ module Borg
             @applications[name].execute
           end
         end
-        @applications[name] = Application.new(name, @namespaces[name], &block)
+        @applications[name] ||= Application.new(name, @namespaces[name])
+        @applications[name].execution_blocks << block if block_given?
       end
 
       class Application
-        attr_accessor :execution_block
+        attr_accessor :execution_blocks
         attr_accessor :stages
 
-        def initialize name, namespace, &block
+        def initialize name, namespace
           @name = name
           @namespace = namespace
-          @execution_block = block
           @stages = {}
         end
 
