@@ -32,6 +32,9 @@ module Borg
       class Stage
         attr_accessor :execution_blocks
         attr_accessor :parent
+        def name
+          "#{parent.name}:#{@name}"
+        end
 
         def initialize name, parent, &block
           @execution_blocks = []
@@ -39,10 +42,9 @@ module Borg
           @parent = parent
         end
 
-        def execute
-          # build new capistrano object here
-          # possibly implemented as a thread so that it does not interferer with current capistrano instance
-          # IMPORTANT: The capistrano config should load the block
+        def load_into config
+          parent.load_into config
+          @execution_blocks.each {|blk| config.load &blk}
         end
       end
     end

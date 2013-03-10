@@ -29,6 +29,7 @@ module Borg
       class Application
         attr_accessor :execution_blocks
         attr_accessor :stages
+        attr_reader   :name
 
         def initialize name, namespace
           @execution_blocks = []
@@ -37,8 +38,8 @@ module Borg
           @stages = {}
         end
 
-        def execute
-          stages.each{|n,s| s.execute}
+        def load_into config
+          @execution_blocks.each {|blk| config.load &blk}
         end
       end
     end
