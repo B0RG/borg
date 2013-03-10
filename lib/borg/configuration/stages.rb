@@ -14,12 +14,13 @@ module Borg
       end
       private :initialize_with_stages
 
-      def stages (app, name, &block)
+      def stage (app, name, &block)
         app = app.to_sym
         name = name.to_sym
         application app unless @applications[app]
 
         namespace app do
+          desc "Load Application #{app} and Stage #{name}"
           task name do
             @applications[app].stages[name].execute
           end
@@ -33,6 +34,7 @@ module Borg
         attr_accessor :parent
 
         def initialize name, parent, &block
+          @execution_blocks = []
           @name = name
           @parent = parent
         end
@@ -46,3 +48,5 @@ module Borg
     end
   end
 end
+
+Capistrano::Configuration.send :include, Borg::Configuration::Stages

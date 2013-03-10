@@ -18,5 +18,5 @@ end
 Capistrano::Configuration.send :include, Borg::Assimilator
 Capistrano::Configuration.instance.load do
   assimilate "borg"
-  load "services/dumb"
+
 end unless Capistrano::Configuration.instance.nil?

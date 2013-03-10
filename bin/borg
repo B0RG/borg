@@ -1,1 +1,8 @@
-cap
+#!/usr/bin/env ruby
+
+require 'capistrano/cli'
+require 'borg/cli/applications'
+require 'borg/configuration/applications'
+require 'borg/configuration/stages'
+
+Capistrano::CLI.execute

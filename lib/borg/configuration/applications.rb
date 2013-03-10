@@ -17,6 +17,7 @@ module Borg
       def application (name, &block)
         name = name.to_sym
         namespace name do
+          desc "Load Application #{name} (All Stages if any)"
           task :default do
             @applications[name].execute
           end
@@ -30,6 +31,7 @@ module Borg
         attr_accessor :stages
 
         def initialize name, namespace
+          @execution_blocks = []
           @name = name
           @namespace = namespace
           @stages = {}
@@ -42,3 +44,5 @@ module Borg
     end
   end
 end
+
+Capistrano::Configuration.send :include, Borg::Configuration::Applications

@@ -6,6 +6,9 @@ module Borg
         Dir["#{gem_home}/cap/initializers/**/*.rb"].each do |file|
           load file
         end
+        Dir["#{gem_home}/cap/applications/**/*.rb"].each do |file|
+          load file
+        end
         @load_paths << "#{gem_home}/cap"
       end
     end
