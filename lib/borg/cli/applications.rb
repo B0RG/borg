@@ -7,6 +7,11 @@ module Borg
       end
 
       def execute_requested_actions_with_applications(config)
+        # load applications
+        Dir["./cap/applications/**/*.rb"].each do |file|
+          config.load file
+        end
+
         options[:applications] = []
         options[:actions] = Array(options[:actions]).keep_if do |action|
           app, stg = action.split(":").map(&:to_sym)
@@ -20,23 +25,15 @@ module Borg
           end
         end
 
-        if options[:tasks]
-          if options[:applications].empty?
-            task_list(config, options[:tasks])
-          else
+        if options[:applications].empty?
+          execute_requested_actions_without_applications(config)
+        else
+          if options[:tasks]
             puts "Will display task list for all applications"
             # Execute all applications and then call task_list for all of them
-          end
-        elsif options[:explain]
-          if options[:applications].empty?
-            explain_task(config, options[:explain])
-          else
+          elsif options[:explain]
             puts "Will display explain task for all applications"
             # Execute all applications and then call explain_task for all of them
-          end
-        else
-          if options[:applications].empty?
-            execute_requested_actions_without_applications(config)
           else
             puts "Will execute all applications and run actions for them"
             # Execute all applications and execute actions against them for all of them

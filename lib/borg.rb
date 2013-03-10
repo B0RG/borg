@@ -15,8 +15,6 @@ def _cset(name, *args, &block)
   end
 end
 
-Capistrano::Configuration.send :include, Borg::Assimilator
-Capistrano::Configuration.instance.load do
+Capistrano::Configuration.instance(:must_exist).load do
   assimilate "borg"
-
-end unless Capistrano::Configuration.instance.nil?
+end
