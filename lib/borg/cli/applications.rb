@@ -47,7 +47,7 @@ module Borg
           elsif options[:explain]
             # I think this should not be threaded to get a clean display
             options[:applications].each do |app|
-              puts "Dsplaying Explain Task for #{app.name}"
+              puts "Displaying Explain Task for #{app.name}"
               execute!
             end
 
