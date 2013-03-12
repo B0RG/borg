@@ -13,10 +13,7 @@ if ARGV.empty? or plugin
   files = {}
 
   files["lib/#{gem_name}.rb"] = <<-GemRequireFile
-require 'borg.rb'
-Capistrano::Configuration.instance.load do
-  assimilate "#{gem_name}"
-end
+assimilate "#{gem_name}"
   GemRequireFile
   if plugin
     files["#{gem_name}.gemspec"] = <<-gemspec
@@ -45,7 +42,9 @@ end
     gemspec
   else
     files["Capfile"] = <<-Capfile
-require 'borg.rb'
+load 'borg.rb'
+# load any other borg gems here.
+# NOTE: require ends up causing the initializers to be called every time a config is loaded.
     Capfile
 
     files["Gemfile"] = <<-Gemfile

@@ -1,1 +1,1 @@
-require 'borg.rb'
+load 'lib/borg'
