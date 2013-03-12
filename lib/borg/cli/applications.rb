@@ -16,9 +16,10 @@ module Borg
         end
 
         options[:applications] = []
+        found_non_application = false
         options[:actions] = Array(options[:actions]).keep_if do |action|
           app, stg = action.split(":").map(&:to_sym)
-          if config.applications[app] and config.applications[app].stages[stg]
+          ret = if config.applications[app] and config.applications[app].stages[stg]
             options[:applications] << config.applications[app].stages[stg]
             false
           elsif config.applications[app] and stg.nil?
@@ -29,8 +30,11 @@ module Borg
             end
             false
           else
+            found_non_application = true
             true
           end
+          raise ArgumentError, "Can not have non application configs between application configs" if !ret and found_non_application
+          ret
         end
 
         if options[:applications].empty?
