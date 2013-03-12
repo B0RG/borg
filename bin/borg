@@ -4,9 +4,9 @@ require 'capistrano/cli'
 require 'borg/cli/applications'
 require 'borg/configuration/applications'
 require 'borg/configuration/stages'
+require 'borg/configuration/assimilator'
 require 'erb'
 
-require 'borg/assimilator'
 require 'borg/errors'
 require 'borg/server/base'
 
