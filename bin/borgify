@@ -42,6 +42,12 @@ end
     gemspec
   else
     files["Capfile"] = <<-Capfile
+# provides a performance report at the end of execution
+# set :borg_performance_reports, true
+
+# runs on :exit events when ctrl-c is hit
+# set :borg_sigint_triggers_exit, true
+
 load 'borg.rb'
 # load any other borg gems here.
 # NOTE: require ends up causing the initializers to be called every time a config is loaded.
