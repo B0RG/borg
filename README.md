@@ -2,6 +2,8 @@
 This is a project inspired by Caphub. It expands on the concept and makes it into a framework for multi application
 deployment.
 
+[![Build Status](https://travis-ci.org/B0RG/borg.png?branch=master)](https://travis-ci.org/B0RG/borg)
+
 # Setup
 ## Deployer Package
 
