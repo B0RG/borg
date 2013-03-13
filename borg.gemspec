@@ -18,4 +18,6 @@ Gem::Specification.new do |s|
   s.add_dependency "capistrano_colors"
   s.add_dependency "colored"
   s.add_dependency 'term-ansicolor'
+
+  s.add_development_dependency 'rspec'
 end
