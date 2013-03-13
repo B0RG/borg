@@ -3,6 +3,7 @@ This is a project inspired by Caphub. It expands on the concept and makes it int
 deployment.
 
 [![Build Status](https://travis-ci.org/B0RG/borg.png?branch=master)](https://travis-ci.org/B0RG/borg)
+[![Code Climate](https://codeclimate.com/github/B0RG/borg.png)](https://codeclimate.com/github/B0RG/borg)
 
 # Setup
 ## Deployer Package
