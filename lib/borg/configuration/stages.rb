@@ -2,18 +2,6 @@ module Borg
   module Configuration
     module Stages
 
-      def self.included(base) #:nodoc:
-        base.send :alias_method, :initialize_without_stages, :initialize
-        base.send :alias_method, :initialize, :initialize_with_stages
-      end
-      attr_reader :stagess
-
-      def initialize_with_stages(*args) #:nodoc:
-        initialize_without_stages(*args)
-        @stages = {}
-      end
-      private :initialize_with_stages
-
       def stage (app, name, &block)
         app = app.to_sym
         name = name.to_sym
@@ -36,7 +24,7 @@ module Borg
           "#{parent.name}:#{@name}"
         end
 
-        def initialize name, parent, &block
+        def initialize name, parent
           @execution_blocks = []
           @name = name
           @parent = parent
