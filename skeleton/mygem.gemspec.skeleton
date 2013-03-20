@@ -1,0 +1,20 @@
+$LOAD_PATH.unshift 'lib'
+
+Gem::Specification.new do |s|
+  s.name              = raise "fill gem name here"
+  s.version           = raise "fill gem version here"
+  s.date              = Time.now.strftime('%Y-%m-%d')
+  s.summary           = raise "fill gem summary here"
+  s.homepage          = raise "fill gem homepage here"
+  s.email             = raise "fill gem contact emails here"
+  s.authors           = raise "fill gem author names here"
+  s.has_rdoc          = false
+
+  s.files             = %w( README.md Rakefile LICENSE )
+  s.files            += Dir.glob("lib/**/*")
+  s.files            += Dir.glob("cap/**/*")
+
+  s.description       = raise "fill gem description here"
+
+  s.add_dependency "borg"
+end

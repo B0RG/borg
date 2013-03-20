@@ -1,64 +1,27 @@
 #!/usr/bin/env ruby
+require 'fileutils'
 plugin = (ARGV.count == 1 and ARGV[0] == "plugin")
 
 if ARGV.empty? or plugin
-
-  puts "Creating directory structure"
-  folders = %w{cap/initializers cap/recipes lib}
-  folders << "cap/applications" unless plugin
-  folders.each { |folder| system("mkdir -p #{folder}") }
-
+  skeleton_dir = File.expand_path('../../skeleton', __FILE__)
   gem_name = File.basename(Dir.pwd)
-  puts "Creating required files"
-  files = {}
 
-  files["lib/#{gem_name}.rb"] = <<-GemRequireFile
-assimilate "#{gem_name}"
-  GemRequireFile
+  puts "Copying Skeleton"
+  FileUtils.cp_r("#{skeleton_dir}/.", ".")
+
+  puts "Creating lib/#{gem_name}.rb"
+  File.open("lib/#{gem_name}.rb", 'w') { |file| file.write("assimilate '#{gem_name}'") }
+
+  puts "Removing unnecessary files and folders"
   if plugin
-    files["#{gem_name}.gemspec"] = <<-gemspec
-$LOAD_PATH.unshift 'lib'
-require "#{gem_name}/version"
-
-Gem::Specification.new do |s|
-  s.name              = "#{gem_name}"
-  s.version           = #{gem_name.capitalize}::VERSION
-  s.date              = Time.now.strftime('%Y-%m-%d')
-  s.summary           = "Feed me."
-  s.homepage          = "#{gem_name} homepage"
-  s.email             = email"
-  s.authors           = [ "Authors" ]
-  s.has_rdoc          = false
-
-  s.files             = %w( README.md Rakefile LICENSE )
-  s.files            += Dir.glob("lib/**/*")
-  s.files            += Dir.glob("cap/**/*")
-
-  s.description       = <<desc
-  Feed me.
-desc
-  s.add_dependency "borg"
-end
-    gemspec
+    FileUtils.rm_r "cap/applications"
+    FileUtils.rm_r "Capfile"
+    FileUtils.rm_r "Gemfile"
+    puts "Setting up gemspec file"
+    FileUtils.mv "mygem.gemspec.skeleton", "#{gem_name}.gemspec"
   else
-    files["Capfile"] = <<-Capfile
-# provides a performance report at the end of execution
-# set :borg_performance_reports, true
-
-# runs on :exit events when ctrl-c is hit
-# set :borg_sigint_triggers_exit, true
-
-load 'borg.rb'
-# load any other borg gems here.
-# NOTE: require ends up causing the initializers to be called every time a config is loaded.
-    Capfile
-
-    files["Gemfile"] = <<-Gemfile
-gem 'borg.rb'
-    Gemfile
+    FileUtils.rm_r "mygem.gemspec.skeleton"
   end
-
-  files.each{ |file_name, content| File.open(file_name, 'w') { |file| file.write(content) } }
 
 else
   # display help if parameters input
