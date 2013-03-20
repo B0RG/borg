@@ -2,3 +2,6 @@ tmp/*
 *.DS_Store
 .rvmrc
 .idea
+vender/bundle
+.bundle
+
