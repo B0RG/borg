@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.test_files    = s.files.grep(%r{^(test|spec|features)/})
   s.require_paths = ["lib"]
 
-  s.add_dependency "capistrano"
+  s.add_dependency "capistrano", "~> 2.14.2"
   s.add_dependency "capistrano_colors"
   s.add_dependency "colored"
   s.add_dependency "term-ansicolor"
