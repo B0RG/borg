@@ -12,12 +12,12 @@ describe Borg::Configuration::Assimilator do
       Dir["cap/initializers/**/*.rb"].each do |file|
         subject.should_receive(:load).with(File.expand_path(file))
       end
-      subject.assimilate ('borg')
+      subject.assimilate ('borg-rb')
     end
 
     it "should add the cap directory to teh load path" do
       Dir.stub("[]").and_return([])
-      lambda { subject.assimilate ('borg') }.should change(subject.load_paths, :count).by 1
+      lambda { subject.assimilate ('borg-rb') }.should change(subject.load_paths, :count).by 1
     end
   end
 end

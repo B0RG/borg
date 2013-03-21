@@ -5,4 +5,4 @@ def _cset(name, *args, &block)
   end
 end
 
-assimilate "borg"
+assimilate "borg-rb"
