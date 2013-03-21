@@ -1,7 +1,41 @@
-tmp/*
-*.DS_Store
-.rvmrc
-.idea
-vender/bundle
+*.gem
+*.rbc
 .bundle
+.config
+Gemfile.lock
+InstalledFiles
+coverage
+lib/bundler/man
+pkg
+rdoc
+spec/reports
+test/tmp
+test/version_tmp
+tmp
 
+# Local Ruby Dev Configs
+.rvmrc
+
+# YARD artifacts
+.yardoc
+_yardoc
+doc/
+
+# JetBrains IDE files
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# OS X
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
