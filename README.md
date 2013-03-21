@@ -6,8 +6,8 @@ deployment.
 [![Dependency Status](https://gemnasium.com/B0RG/borg.png)](https://gemnasium.com/B0RG/borg)
 [![Code Climate](https://codeclimate.com/github/B0RG/borg.png)](https://codeclimate.com/github/B0RG/borg)
 
-# Setup
-## Deployer Package
+## Setup
+### Deployer Package
 
 `borgify` Sets up the following structure
 
@@ -42,7 +42,7 @@ load 'borg'
 
 ```
 
-## Services Package
+### Services Package
 `borgify plugin` Sets up the following structure
 
 ```
@@ -83,3 +83,11 @@ then all the blocks will be run for that application/stage.
 The CLI enforces that all configs be specified at the start. Consider the command `borg app1:stage1 app2 deploy`
 will result in config app1:stage1, all configs for app2 (1 config for each stage, if there is no stage it assumes the app is the only stage)
 to be load and the deploy task be run against all of them.
+
+## Contributing
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request

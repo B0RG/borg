@@ -16,5 +16,5 @@ Gem::Specification.new do |s|
 
   s.description       = raise "fill gem description here"
 
-  s.add_dependency "borg"
+  s.add_dependency "borg-rb"
 end
