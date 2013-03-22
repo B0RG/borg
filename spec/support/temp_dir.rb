@@ -10,20 +10,7 @@ module Support
     attr_reader :path
 
     def initialize(basename = "borg")
-      @path = nil
-
-      # Loop and attempt to create a temporary directory until it succeeds.
-      while @path.nil?
-        file = Tempfile.new(basename)
-        @path = file.path
-        file.unlink
-
-        begin
-          Dir.mkdir(@path)
-        rescue
-          @path = nil
-        end
-      end
+      @path = Dir.mktmpdir(basename)
 
       # Setup a finalizer to delete the directory. This is the same way
       # that Tempfile and friends do this...
