@@ -24,4 +24,6 @@ Gem::Specification.new do |s|
   s.add_dependency "term-ansicolor"
 
   s.add_development_dependency "rspec"
+  s.add_development_dependency "childprocess"
+
 end
