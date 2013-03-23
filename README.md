@@ -18,11 +18,11 @@ my-deployer-package
 |   |   ├── application1.rb
 │   |   └── application2.rb
 |   ├── initilizers
-|   |   ├── initilizer1.rb
-│   |   └── initilizer2.rb
+|   |   ├── initializer1.rb
+│   |   └── initializer2.rb
 |   └── recipies
-|       ├── recipie1.rb
-│       └── recipie2.rb
+|       ├── recipe1.rb
+│       └── recipe2.rb
 ├── Capfile
 ├── Gemfile
 └── Gemfile.lock
@@ -49,11 +49,11 @@ load 'borg'
 my-service-package
 ├── cap
 |   ├── initilizers
-|   |   ├── initilizer1.rb
-│   |   └── initilizer2.rb
+|   |   ├── initializer1.rb
+│   |   └── initializer2.rb
 |   └── recipies
-|       ├── recipie1.rb
-│       └── recipie2.rb
+|       ├── recipe1.rb
+│       └── recipe2.rb
 ├── my-service-package.gemspec
 ├── Gemfile
 └── Gemfile.lock
