@@ -10,7 +10,13 @@ if ARGV.empty? or plugin
   FileUtils.cp_r("#{skeleton_dir}/.", ".")
 
   puts "Creating lib/#{gem_name}.rb"
-  File.open("lib/#{gem_name}.rb", 'w') { |file| file.write("assimilate '#{gem_name}'") }
+  File.open("lib/#{gem_name}.rb", 'w') do |file|
+    file.write(<<-GEMRB)
+Capistrano::Configuration.instance(:must_exist).load do
+  assimilate "#{gem_name}"
+end
+    GEMRB
+  end
 
   puts "Removing unnecessary files and folders"
   if plugin

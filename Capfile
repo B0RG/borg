@@ -1,1 +1,1 @@
-load 'lib/borg'
+require 'borg-rb'

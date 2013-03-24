@@ -2,6 +2,7 @@
 
 require 'capistrano/cli'
 require 'borg/cli/applications'
+require 'borg/cli/assimilator'
 require 'borg/configuration/applications'
 require 'borg/configuration/stages'
 require 'borg/configuration/assimilator'

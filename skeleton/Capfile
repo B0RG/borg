@@ -4,7 +4,6 @@
 # runs on :exit events when ctrl-c is hit
 # set :borg_sigint_triggers_exit, true
 
-load "#{Gem::Specification.find_by_name('borg-rb').gem_dir}/lib/borg.rb"
+require "borg-rb"
 
-# load any other borg gems here.
-# NOTE: require ends up causing the initializers to be called every time a config is loaded.
+# require any other borg gems here.

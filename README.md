@@ -36,9 +36,8 @@ my-deployer-package
 # runs on :exit events when ctrl-c is hit
 # set :borg_sigint_triggers_exit, true
 
-load 'borg'
-# load any other borg gems here.
-# NOTE: require ends up causing the initializers to be called every time a config is loaded.
+require 'borg-rb'
+# require any other borg gems here.
 
 ```
 
