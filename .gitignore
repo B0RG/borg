@@ -6,6 +6,7 @@ Gemfile.lock
 InstalledFiles
 coverage
 lib/bundler/man
+vender/bundle
 pkg
 rdoc
 spec/reports
