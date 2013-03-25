@@ -15,7 +15,10 @@ test/version_tmp
 tmp
 
 # Local Ruby Dev Configs
+# Why? We aren't tied to a specific ruby version, should work on 1.9, 2.0, jruby, etc...
+# Let our travis config dictate what ruby to run our gem in.
 .rvmrc
+.ruby-version
 
 # YARD artifacts
 .yardoc
