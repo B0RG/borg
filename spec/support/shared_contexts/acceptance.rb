@@ -21,7 +21,6 @@ shared_context "acceptance" do
   def assert_execute(*args, &block)
     result = execute(*args, &block)
     expect(result).to succeed
-    #assert(result.exit_code == 0, "expected '#{args.join(" ")}' to succeed")
     result
   end
 
