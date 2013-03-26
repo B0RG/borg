@@ -67,11 +67,11 @@ Borg provides a application and stage config setup.
 One can define applications with the format.
 ``` ruby
 application :app_name do
-  do things needed to setup the application environment.
+  # do things needed to setup the application environment.
 end
 
 stage :app_name, :stage_name do
-  do things for specific stage for the applications.
+  # do things for specific stage for the applications.
 end
 ```
 

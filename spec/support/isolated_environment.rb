@@ -14,7 +14,7 @@ module Support
     def initialize
       # Create a temporary directory for our work
       @workdir = TempDir.new("borg")
-      @workdir_path = Pathname.new(TempDir.new("borg").path)
+      @workdir_path = Pathname.new(@workdir.path)
       # puts "Initialize isolated environment: #{@workdir_path.to_s}"
     end
 
@@ -53,6 +53,12 @@ module Support
     def close
       # puts "Removing isolated environment: #{@workdir.path}"
       FileUtils.rm_rf(@workdir.path)
+    end
+
+    def file_write(filename, content)
+      File.open @workdir_path.join(filename), "w" do |file|
+        file.write(content)
+      end
     end
   end
 end
