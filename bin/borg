@@ -13,6 +13,6 @@ require 'borg/server/base'
 require 'borg/servers/base'
 
 # Ensure ruby 1.9.X
-raise "Ruby 1.9.X required" unless RUBY_VERSION =~ /^1\.9\.\d$/
+raise "Ruby 1.9.X required" unless RUBY_VERSION =~ /^1\.9\.\d$/ || RUBY_VERSION =~ /^2\.0\.\d$/
 
 Capistrano::CLI.execute
