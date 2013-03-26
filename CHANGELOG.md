@@ -1,8 +1,9 @@
 ## Current (Unreleased)
 
-## 0.0.2 / 3-22-2013
+## 0.0.3 / 3-22-2013
 
-* Fix load problem in Capfile in generated skeleton
+* Fix load problem in Capfile in generated skeleton (0.0.2)
+* Change load borg-rb to a require
 
 
 ## 0.0.1 / 3-21-2013
