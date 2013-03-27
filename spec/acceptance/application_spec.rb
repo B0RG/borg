@@ -23,6 +23,7 @@ describe 'borg app:stage task' do
       task :stg_task do
       end
     end
+    stage :app, :alf
   RUBY
   }
 
@@ -61,6 +62,7 @@ describe 'borg app:stage task' do
       # commonly defined tasks
       assert_execute('borg', 'app:prd', 'app_task')
       assert_execute('borg', 'app:stg', 'app_task')
+      assert_execute('borg', 'app:alf', 'app_task')
 
       # stage specific tasks in their respective stages
       assert_execute('borg', 'app:prd', 'prd_task')

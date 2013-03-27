@@ -13,7 +13,7 @@ module Borg
           end
         end
         @applications[app].stages[name] ||= Stage.new(name, @applications[app])
-        @applications[app].stages[name].execution_blocks << block
+        @applications[app].stages[name].execution_blocks << block if block_given?
       end
 
       class Stage
