@@ -24,7 +24,6 @@ end
 
     it 'the task prints `prd`' do
       result = execute('borg', 'app:prd', 'display_stage')
-      puts result.stderr
       expect(result.stdout).to match(/The stage is set to: prd/)
     end
   end

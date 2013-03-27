@@ -39,6 +39,14 @@ module Borg
         end
 
         def load_into config
+          if config.respond_to?(:application)
+            # Undefine the stage method now that the app:stage config is created
+            config_metaclass = class << config; self; end
+            config_metaclass.send(:undef_method, 'application')
+
+            # Create a capistrano variable for stage
+            config.instance_exec(@name, &(lambda { |name| set :application, name }))
+          end
           @execution_blocks.each {|blk| config.load &blk}
         end
       end

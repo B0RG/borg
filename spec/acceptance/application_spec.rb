@@ -3,6 +3,53 @@ require 'spec_helper'
 describe 'borg app:stage task' do
   include_context 'acceptance'
 
+  # TODO: probably want to have some factory that generates what we want in an app config to DRY this out
+  let(:basic_app_config) {
+    <<-RUBY
+application :app do
+  task :some_task do
+  end
+end
+    RUBY
+  }
+
+  let(:app_config_with_stages) {
+    <<-RUBY
+application :app do
+  task :common_task do
+  end
+end
+stage :app, :prd do
+  task :prd_task do
+  end
+end
+stage :app, :stg do
+  task :stg_task do
+  end
+end
+    RUBY
+  }
+
+  let(:app_config_with_display_app_task) {
+    <<-RUBY
+application :app do
+  task :display_app do
+    puts "The application is set to: \#{application}"
+  end
+end
+    RUBY
+  }
+
+  let(:app_config_with_stage_with_display_app_task) {
+    <<-RUBY
+stage :app, :prd do
+  task :display_app do
+    puts "The application is set to: \#{application}"
+  end
+end
+    RUBY
+  }
+
   before do
     assert_execute('borgify')
   end
@@ -44,30 +91,26 @@ describe 'borg app:stage task' do
     end
   end
 
-end
+  context 'app with a task `display_app` which prints `application`' do
+    before do
+      environment.create_file('cap/applications/app.rb', app_config_with_display_app_task)
+    end
 
-def basic_app_config
-  <<-RUBY
-application :app do
-  task :some_task do
+    it 'the task prints `app`' do
+      result = execute('borg', 'app', 'display_app')
+      expect(result.stdout).to match(/The application is set to: app/)
+    end
   end
-end
-  RUBY
-end
 
-def app_config_with_stages
-  <<-RUBY
-application :app do
-  task :common_task do
+  context 'app with stages: prd, and a task `display_app` which prints `application`' do
+    before do
+      environment.create_file('cap/applications/app.rb', app_config_with_stage_with_display_app_task)
+    end
+
+    it 'the task prints `app`' do
+      result = execute('borg', 'app:prd', 'display_app')
+      expect(result.stdout).to match(/The application is set to: app/)
+    end
   end
-end
-stage :app, :prd do
-  task :prd_task do
-  end
-end
-stage :app, :stg do
-  task :stg_task do
-  end
-end
-  RUBY
+
 end
