@@ -6,12 +6,10 @@ module Borg
         base.send :alias_method, :execute_requested_actions, :execute_requested_actions_with_applications
       end
 
+      # TODO: documentation for `options`, where does it come from?
       def execute_requested_actions_with_applications(config)
-
-        load_applications config
-
-        separate_actions_and_applications config
-
+        load_applications(config)
+        separate_actions_and_applications(config)
         if options[:applications].empty? or Thread.current[:borg_application]
           Thread.current[:borg_application].load_into config if Thread.current[:borg_application]
           execute_requested_actions_without_applications(config)
@@ -26,17 +24,14 @@ module Borg
 
       private
 
-      def load_applications config
-        # load applications
+      def load_applications(config)
         unless @apps_loaded
-          Dir["./cap/applications/**/*.rb"].each do |file|
-            config.load file
-          end
+          Dir["./cap/applications/**/*.rb"].each { |file| config.load(file) }
           @apps_loaded = true
         end
       end
 
-      def separate_actions_and_applications config
+      def separate_actions_and_applications(config)
         options[:applications] = []
         found_non_application = false
         options[:actions] = Array(options[:actions]).keep_if do |action|
@@ -63,4 +58,4 @@ module Borg
   end
 end
 
-Capistrano::CLI.send :include, Borg::CLI::Applications
+Capistrano::CLI.send(:include, Borg::CLI::Applications)

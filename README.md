@@ -90,3 +90,5 @@ to be load and the deploy task be run against all of them.
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+Ruby Style Guidelines: We like this one https://github.com/styleguide/ruby

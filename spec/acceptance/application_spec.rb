@@ -9,7 +9,7 @@ describe 'borg app:stage task' do
 
   context "app with no stages" do
     before do
-      environment.file_write('cap/applications/app.rb', basic_app_config)
+      environment.create_file('cap/applications/app.rb', basic_app_config)
     end
 
     it "allows us to run tasks for that app" do
@@ -26,7 +26,7 @@ describe 'borg app:stage task' do
 
   context "app with stages: prd, stg" do
     before do
-      environment.file_write('cap/applications/app.rb', app_config_with_stages)
+      environment.create_file('cap/applications/app.rb', app_config_with_stages)
     end
 
     it "allows us to set common/stage-specific tasks" do
