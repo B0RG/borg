@@ -1,17 +1,7 @@
 require 'spec_helper'
-require 'borg/cli/applications'
+require 'borg/cli'
 
-describe Borg::CLI::Applications do
-  before :all do
-    class MockCLI < Capistrano::CLI
-      include Borg::CLI::Applications
-    end
-  end
-
-  after :all do
-    Object.send(:remove_const, :MockCLI)
-  end
-
+describe Borg::CLI do
   let(:app_config) { <<-RUBY.gsub(/^ {4}/, '')
     application :app1 do
       puts 'application = app1'
@@ -39,12 +29,12 @@ describe Borg::CLI::Applications do
   end
 
   after :all do
-    #@env.close
+    @env.close
   end
 
   before do
     Dir.stub('[]').and_return(@files)
-    @cli = MockCLI.new([])
+    @cli = Borg::CLI.new([])
     @config = double('config1')
   end
 
@@ -86,9 +76,9 @@ describe Borg::CLI::Applications do
       @cli.send :separate_actions_and_applications, @config
       expect(@cli.options[:actions]).to eq %w{app2:stg3 test test2}
       expect(@cli.options[:applications]).to eq [
-                                                    @config.applications[:app1],
-                                                    @config.applications[:app2].stages[:stg1]
-                                                ]
+          @config.applications[:app1],
+          @config.applications[:app2].stages[:stg1]
+      ]
     end
 
     it 'queues both stages if app2' do
@@ -100,10 +90,10 @@ describe Borg::CLI::Applications do
 
       expect(@cli.options[:actions]).to eq %w{test test2}
       expect(@cli.options[:applications]).to eq [
-                                                    @config.applications[:app1],
-                                                    @config.applications[:app2].stages[:stg1],
-                                                    @config.applications[:app2].stages[:stg2]
-                                                ]
+          @config.applications[:app1],
+          @config.applications[:app2].stages[:stg1],
+          @config.applications[:app2].stages[:stg2]
+      ]
     end
 
     it 'raises an exception when configs are not isolated to start of the actions list' do

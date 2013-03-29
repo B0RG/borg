@@ -1,7 +1,6 @@
 module Borg
-  module Configuration
+  class Configuration < Capistrano::Configuration
     module Applications
-
       def self.included(base) #:nodoc:
         base.send :alias_method, :initialize_without_applications, :initialize
         base.send :alias_method, :initialize, :initialize_with_applications
@@ -14,7 +13,7 @@ module Borg
       end
       private :initialize_with_applications
 
-      def application (name, &block)
+      def application(name, &block)
         name = name.to_sym
         namespace name do
           desc "Load Application #{name} (All Stages if any)"
@@ -31,14 +30,14 @@ module Borg
         attr_accessor :stages
         attr_reader   :name
 
-        def initialize name, namespace
+        def initialize(name, namespace)
           @execution_blocks = []
           @name = name
           @namespace = namespace
           @stages = {}
         end
 
-        def load_into config
+        def load_into(config)
           if config.respond_to?(:application)
             # Undefine the stage method now that the app:stage config is created
             config_metaclass = class << config; self; end
@@ -47,11 +46,9 @@ module Borg
             # Create a capistrano variable for stage
             config.instance_exec(@name, &(lambda { |name| set :application, name }))
           end
-          @execution_blocks.each {|blk| config.load &blk}
+          @execution_blocks.each { |blk| config.load &blk }
         end
       end
     end
   end
 end
-
-Capistrano::Configuration.send :include, Borg::Configuration::Applications

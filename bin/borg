@@ -1,18 +1,27 @@
 #!/usr/bin/env ruby
 
-require 'capistrano/cli'
-require 'borg/cli/applications'
-require 'borg/cli/assimilator'
-require 'borg/configuration/applications'
-require 'borg/configuration/stages'
-require 'borg/configuration/assimilator'
-require 'erb'
+##require 'capistrano/cli'
+##require 'borg/cli/applications'
+##require 'borg/cli/assimilator'
+#require 'lib/borg/cli'
+#require 'borg/configuration/applications'
+#require 'borg/configuration/stages'
+#require 'borg/configuration/assimilator'
+#require 'borg/errors'
+#require 'borg/server/base'
+#require 'borg/servers/base'
+#
+#require 'erb'
+#
+## Colors
+#require 'capistrano_colors'
+#require 'colored'
+#require 'term/ansicolor'
+#
+## Ensure ruby 1.9.X
+## raise "Ruby 1.9.X required" unless RUBY_VERSION =~ /^1\.9\.\d$/ || RUBY_VERSION =~ /^2\.0\.\d$/
+#
+#Capistrano::CLI.execute
 
-require 'borg/errors'
-require 'borg/server/base'
-require 'borg/servers/base'
-
-# Ensure ruby 1.9.X
-raise "Ruby 1.9.X required" unless RUBY_VERSION =~ /^1\.9\.\d$/ || RUBY_VERSION =~ /^2\.0\.\d$/
-
-Capistrano::CLI.execute
+require 'borg'
+Borg::CLI.execute

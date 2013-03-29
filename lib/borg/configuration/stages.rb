@@ -1,5 +1,5 @@
 module Borg
-  module Configuration
+  class Configuration < Capistrano::Configuration
     module Stages
       def stage(app, name, &block)
         app = app.to_sym
@@ -48,5 +48,3 @@ module Borg
     end
   end
 end
-
-Capistrano::Configuration.send(:include, Borg::Configuration::Stages)

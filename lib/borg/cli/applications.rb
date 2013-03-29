@@ -1,5 +1,5 @@
 module Borg
-  module CLI
+  class CLI < Capistrano::CLI
     module Applications
       def self.included(base) #:nodoc:
         base.send :alias_method, :execute_requested_actions_without_applications, :execute_requested_actions
@@ -57,5 +57,3 @@ module Borg
     end
   end
 end
-
-Capistrano::CLI.send(:include, Borg::CLI::Applications)

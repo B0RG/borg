@@ -1,5 +1,4 @@
-_cset :borg_performance_reports, true
-if borg_performance_reports
+if fetch(:borg_performance_reports, true)
   # source: https://github.com/PagerDuty/pd-cap-recipes/blob/master/lib/pd-cap-recipes/tasks/performance.rb
   start_times = {}
   end_times = {}
@@ -24,19 +23,19 @@ if borg_performance_reports
       logger.info s
     end
 
-    l " Performance Report"
-    l "=========================================================="
+    l ' Performance Report'
+    l '=========================================================='
     indent = 0
     (order + [nil]).each_cons(2) do |payload1, payload2|
       action, task = payload1
       if action == :start
-        l "#{".." * indent}#{task.fully_qualified_name}" unless task == payload2.last
+        l "#{'..' * indent}#{task.fully_qualified_name}" unless task == payload2.last
         indent += 1
       else
         indent -= 1
-        l "#{".." * indent}#{task.fully_qualified_name} #{(end_times[task] - start_times[task]).to_i}s"
+        l "#{'..' * indent}#{task.fully_qualified_name} #{(end_times[task] - start_times[task]).to_i}s"
       end
     end
-    l "=========================================================="
+    l '=========================================================='
   end
 end
