@@ -50,7 +50,7 @@ module Borg
             found_non_application = true
             true
           end
-          raise ArgumentError, "Can not have non application configs between application configs" if !ret and found_non_application
+          raise ArgumentError, 'Can not have non application configs between application configs' if !ret and found_non_application
           ret
         end
       end

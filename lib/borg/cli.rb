@@ -1,5 +1,6 @@
 require 'capistrano/cli'
 require 'borg/cli/applications'
+require 'borg/cli/assimilator'
 require 'borg/configuration'
 require 'borg/errors'
 
@@ -8,12 +9,6 @@ module Borg
     # override method in Capistrano::CLI::Execute
     def instantiate_configuration(options = {}) #:nodoc:
       Borg::Configuration.new(options)
-    end
-
-    # override method in Capistrano::CLI::Execute
-    def execute_requested_actions(config)
-      config.assimilate!
-      super(config)
     end
 
     # override method in Capistrano::CLI::Execute
@@ -28,6 +23,6 @@ module Borg
     end
 
     # Mix-in our own behavior
-    include Applications
+    include Applications, Assimilator
   end
 end

@@ -8,5 +8,5 @@ module ::Capistrano
   end
 end
 
-desc "Resets all dynamic capistrano roles."
+desc 'Resets all dynamic capistrano roles.'
 task(:reset_roles) { roles.each {|k,v| v.reset!} }
