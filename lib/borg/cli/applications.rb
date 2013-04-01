@@ -26,7 +26,7 @@ module Borg
 
       def load_applications(config)
         unless @apps_loaded
-          Dir["./cap/applications/**/*.rb"].each { |file| config.load(file) }
+          Dir['./cap/applications/**/*.rb'].each { |file| config.load(file) }
           @apps_loaded = true
         end
       end
@@ -35,7 +35,7 @@ module Borg
         options[:applications] = []
         found_non_application = false
         options[:actions] = Array(options[:actions]).keep_if do |action|
-          app, stg = action.split(":").map(&:to_sym)
+          app, stg = action.split(':').map(&:to_sym)
           ret = if config.applications[app] and config.applications[app].stages[stg]
             options[:applications] << config.applications[app].stages[stg]
             false

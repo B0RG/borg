@@ -39,7 +39,7 @@ describe Borg::CLI::Applications do
   end
 
   after :all do
-    #@env.close
+    @env.close
   end
 
   before do
