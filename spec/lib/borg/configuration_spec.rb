@@ -7,7 +7,6 @@ describe Borg::Configuration do
         Borg::Configuration.ancestors
     ).to include(Borg::Configuration::Applications,
                  Borg::Configuration::Assimilator,
-                 Borg::Configuration::Tasks,
                  Borg::Configuration::Stages)
 
   end
