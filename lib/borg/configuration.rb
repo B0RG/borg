@@ -8,7 +8,6 @@ module Capistrano
   class Configuration
     module Namespaces
       def filter_task(name, options={}, &block)
-        puts "________________)____"
         task(name, options) do
           filter_hosts find_servers_for_task(current_task).join(','), &block
         end
