@@ -23,6 +23,6 @@ module Borg
     end
 
     # Mix-in our own behavior
-    include Applications, Assimilator
+    include Assimilator, Applications
   end
 end
