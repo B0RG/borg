@@ -20,7 +20,7 @@ my-deployer-package
 |   ├── initilizers
 |   |   ├── initializer1.rb
 │   |   └── initializer2.rb
-|   └── recipies
+|   └── recipes
 |       ├── recipe1.rb
 │       └── recipe2.rb
 ├── Capfile
