@@ -15,11 +15,14 @@ module Capistrano
 
       def filter_hosts(hosts, &block)
         original_hostfilter = ENV['HOSTFILTER']
-        ENV['HOSTFILTER'] = hosts
-        logger.info "changing HOSTFILTER from #{original_hostfilter} to #{hosts}".cyan
-        block.call
-        logger.info "resetting HOSTFILTER to #{original_hostfilter}".cyan
-        ENV['HOSTFILTER'] = original_hostfilter
+        begin
+          ENV['HOSTFILTER'] = hosts
+          logger.info "changing HOSTFILTER from #{original_hostfilter} to #{hosts}".cyan
+          block.call
+          logger.info "resetting HOSTFILTER to #{original_hostfilter}".cyan
+        ensure
+          ENV['HOSTFILTER'] = original_hostfilter
+        end
       end
 
       def remote_condition(bash_cmd)
