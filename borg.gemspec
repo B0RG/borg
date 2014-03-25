@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 1.9.2'
 
-  s.add_dependency 'capistrano', '~> 2.15.1'
+  s.add_dependency 'capistrano', '~> 2.15'
   s.add_dependency 'capistrano_colors'
   s.add_dependency 'colored'
   s.add_dependency 'term-ansicolor'
