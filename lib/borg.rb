@@ -1,5 +1,5 @@
 # Ensure ruby 1.9.X
-raise 'Ruby 1.9.x or 2.0.x required' unless RUBY_VERSION =~ /^1\.9\.\d$/ || RUBY_VERSION =~ /^2\.0\.\d$/
+raise 'Ruby 1.9.x, 2.x.x,  required' unless RUBY_VERSION =~ /^1\.9\.\d$/ || RUBY_VERSION =~ /^2\.\d\.\d$/
 
 # Colors
 require 'capistrano_colors'
