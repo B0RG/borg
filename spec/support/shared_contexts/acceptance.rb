@@ -25,3 +25,4 @@ shared_context "acceptance" do
   end
 
 end
+

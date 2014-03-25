@@ -12,24 +12,26 @@ describe Borg::CLI::Applications do
     Object.send(:remove_const, :MockCLI)
   end
 
-  let(:app_config) { <<-RUBY.gsub(/^ {4}/, '')
-    application :app1 do
-      puts 'application = app1'
-    end
+  def app_config
+    <<-RUBY.gsub(/^ {4}/, '')
+      end
+      application :app1 do
+        puts 'application = app1'
+      end
 
-    stage :app1, :prd do
-      puts 'stage = prd'
-    end
+      stage :app1, :prd do
+        puts 'stage = prd'
+      end
 
-    stage :app1, :stg do
-      puts 'stage = stg'
-    end
+      stage :app1, :stg do
+        puts 'stage = stg'
+      end
 
-    stage :app1, :alf do
-      puts 'stage = alf'
-    end
-  RUBY
-  }
+      stage :app1, :alf do
+        puts 'stage = alf'
+      end
+    RUBY
+  end
 
   before :all do
     @env = Support::IsolatedEnvironment.new

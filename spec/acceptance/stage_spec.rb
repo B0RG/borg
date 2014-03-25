@@ -3,19 +3,20 @@ require 'spec_helper'
 describe 'borg app:stage task' do
   include_context 'acceptance'
 
-  let(:app_config) { <<-RUBY.gsub(/^ {4}/, '')
-    stage :app, :prd do
-      task :display_stage do
-        puts "The stage is set to: \#{stage}"
+  def app_config
+    <<-RUBY.gsub(/^ {4}/, '')
+      stage :app, :prd do
+        task :display_stage do
+          puts "The stage is set to: \#{stage}"
+        end
       end
-    end
-    stage :app, :stg do
-      task :display_stage do
-        puts "The stage is set to: \#{stage}"
+      stage :app, :stg do
+        task :display_stage do
+          puts "The stage is set to: \#{stage}"
+        end
       end
-    end
-  RUBY
-  }
+    RUBY
+  end
 
   before do
     assert_execute('borgify')

@@ -3,29 +3,32 @@ require 'spec_helper'
 describe 'borg app:stage task' do
   include_context 'acceptance'
 
-  let(:app_config) { <<-RUBY.gsub(/^ {4}/, '')
-    application :app do
-      task :app_task do
+  def app_config
+    <<-RUBY.gsub(/^ {4}/, '')
+      application :app do
+        task :app_task do
+        end
+        task :display_app do
+          puts "The application is set to: \#{application}"
+        end
       end
-      task :display_app do
-        puts "The application is set to: \#{application}"
-      end
-    end
-  RUBY
-  }
+    RUBY
+  end
 
-  let(:app_config_with_stages) { app_config.concat <<-RUBY.gsub(/^ {6}/, '')
-    stage :app, :prd do
-      task :prd_task do
+  def app_config_with_stages
+     app_config.concat <<-RUBY.gsub(/^ {6}/, '')
+      stage :app, :prd do
+        task :prd_task do
+        end
       end
-    end
-    stage :app, :stg do
-      task :stg_task do
+      stage :app, :stg do
+        task :stg_task do
+        end
       end
-    end
-    stage :app, :alf
-  RUBY
-  }
+      stage :app, :alf
+    RUBY
+  end
+
 
   before do
     assert_execute('borgify')
